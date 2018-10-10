@@ -158,3 +158,13 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+    cert: fs.readFileSync('/etc/letsencrypt/live/explore.odinblockchain.org/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/explore.odinblockchain.org//privkey.pem')
+};
+app.listen(8080);
+https.createServer(options, app).listen(443);
